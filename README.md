@@ -1,4 +1,4 @@
-```markdown
+
  🛡️ Emply - The HVF Employee Intelligence 🪖
 
 An enterprise-grade, secure offline AI assistant engineered specifically for the **Heavy Vehicles Factory (HVF) in Avadi, Chennai**, operating under Armoured Vehicles Nigam Limited (AVNL), Ministry of Defence, Government of India. 
@@ -47,7 +47,7 @@ Follow these sequential steps to run this secure terminal environment on your lo
 git clone [https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git](https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git)
 cd Emply-AI-The-HVF-Employee-Intelligence
 
-```
+
 
 ### 2. Configure the Offline LLM Environment
 
