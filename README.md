@@ -1,5 +1,5 @@
 ```markdown
-# 🛡️ Emply - The HVF Employee Intelligence 🪖
+ 🛡️ Emply - The HVF Employee Intelligence 🪖
 
 An enterprise-grade, secure offline AI assistant engineered specifically for the **Heavy Vehicles Factory (HVF) in Avadi, Chennai**, operating under Armoured Vehicles Nigam Limited (AVNL), Ministry of Defence, Government of India. 
 
@@ -7,7 +7,7 @@ Emply features a cutting-edge **dual-brain routing architecture** that dynamical
 
 ---
 
-## 🚀 Key Features
+ 🚀 Key Features
 
 * **Secure Authentication Portal:** A hard-coded terminal-style login gate protecting internal data structures from unauthorized perimeter access.
 * **Dual-Brain Intelligent Router:** A low-latency classification algorithm that determines if a user inquiry requires data extraction (`DATABASE`) or conceptual analysis (`GENERAL`).
@@ -17,7 +17,7 @@ Emply features a cutting-edge **dual-brain routing architecture** that dynamical
 
 ---
 
-## 🛠️ Tech Stack
+ 🛠️ Tech Stack
 
 * **User Interface:** Streamlit (Python-based Web Framework)
 * **Database Management:** MySQL Relational Database Server
@@ -26,7 +26,7 @@ Emply features a cutting-edge **dual-brain routing architecture** that dynamical
 
 ---
 
-## 📊 Database Schema Architecture
+ 📊 Database Schema Architecture
 
 The database tracks tracking parameters across a 100-employee roster distributed throughout 6 primary shop environments:
 
@@ -38,7 +38,7 @@ The database tracks tracking parameters across a 100-employee roster distributed
 
 ---
 
-## 💻 Installation & Local Deployment Guide
+ 💻 Installation & Local Deployment Guide
 
 Follow these sequential steps to run this secure terminal environment on your local workstation:
 
