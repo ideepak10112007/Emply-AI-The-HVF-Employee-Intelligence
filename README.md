@@ -44,7 +44,9 @@ Follow these sequential steps to run this secure terminal environment on your lo
 
 ### 1. Clone the Repository
 cmd
+
 git clone [https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git](https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git)
+
 cd Emply-AI-The-HVF-Employee-Intelligence
 
 
