@@ -5,9 +5,7 @@ import mysql.connector
 import pandas as pd
 import re
 
-# ============================================================
-#  1. DATABASE CONFIGURATION
-# ============================================================
+#DATABASE
 def get_db_connection():
     try:
         return mysql.connector.connect(
@@ -19,17 +17,11 @@ def get_db_connection():
     except Exception:
         return None
 
-
-# ============================================================
-#  2. OLLAMA CONFIGURATION  — swap model name here only
-# ============================================================
+#OLLAMA
 OLLAMA_HOST = "http://localhost:11434"
 MODEL_NAME  = "llama3.2:3b-instruct-q4_K_M"   
 
-
-# ============================================================
-#  3. PAGE CONFIG & STYLING
-# ============================================================
+#PAGE STYLING
 st.set_page_config(
     page_title="Emply — HVF Employee Intelligence",
     page_icon="🛡️",
@@ -56,10 +48,7 @@ section[data-testid="stSidebar"] { min-width: 240px !important; }
 </style>
 """, unsafe_allow_html=True)
 
-
-# ============================================================
-#  4. SECURE LOGIN
-# ============================================================
+#SECURE LOGIN
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
@@ -82,10 +71,7 @@ if not st.session_state.logged_in:
     login()
     st.stop()
 
-
-# ============================================================
-#  5. SIDEBAR
-# ============================================================
+#SIDEBAR
 st.sidebar.title("🌐 Emply Prime_v4")
 st.sidebar.caption("HVF AI Agent  |  System Status: **Online**")
 st.sidebar.divider()
@@ -101,20 +87,14 @@ if st.sidebar.button("🔌  Lock System", use_container_width=True):
 st.sidebar.divider()
 st.sidebar.caption("DB: `emply_db @ localhost`")
 
-
-# ============================================================
-#  6. HEADER
-# ============================================================
+#HEADER
 st.title("💬 Emply — The HVF Employee Intelligence")
 st.caption("Ask me anything: Employee records, HVF history, Tank specs, Science, Code — or just say Hi.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-
-# ============================================================
-#  7. KNOWLEDGE BASE  (single source of truth injected everywhere)
-# ============================================================
+#KNOWLEDGE BASE
 HVF_KNOWLEDGE = """
 === HVF FACTUAL KNOWLEDGE (DO NOT HALLUCINATE BEYOND THIS) ===
 - HVF = Heavy Vehicles Factory, Avadi, Chennai, Tamil Nadu, India.
@@ -133,12 +113,8 @@ Table: employee_leaves-> leave_id, emp_id, leave_type, status
 'JWM' or 'Joint Working Manager'         -> designation  = 'JWM'
 """
 
-
-# ============================================================
-#  8. SYSTEM PROMPTS
-# ============================================================
-
-# ── 8A. INTENT CLASSIFIER ───────────────────────────────────
+#SYSTEM PROMPTS
+#A.INTENT CLASSIFIER
 CLASSIFIER_PROMPT = f"""
 You are a strict intent classifier. Your ONLY job is to output exactly one word.
 
@@ -151,7 +127,7 @@ Rules:
 Do NOT output anything else. One word. No punctuation. No explanation.
 """
 
-# ── 8B. SQL GENERATOR ───────────────────────────────────────
+#SQL GENERATOR
 SQL_GENERATOR_PROMPT = f"""
 You are an expert MySQL query writer. Convert natural language to a single valid MySQL SELECT query.
 
@@ -176,7 +152,7 @@ STRICT RULES:
 10. If the question is truly unanswerable by SQL, output exactly: CANNOT_GENERATE
 """
 
-# ── 8C. ANSWER GENERATOR ────────────────────────────────────
+#ANSWER GENERATOR
 ANSWER_PROMPT = f"""
 You are Emply, the intelligent AI assistant for the Heavy Vehicles Factory (HVF), Avadi.
 Your personality: elite, precise, professional, and direct.
@@ -204,10 +180,7 @@ CRITICAL:
 - For DB summaries: present data cleanly; do not re-invent numbers already shown in the table.
 """
 
-
-# ============================================================
-#  9. HELPER  — call Ollama (no streaming, reliable)
-# ============================================================
+#HELPER
 def ollama_chat(system: str, messages: list, stream: bool = False) -> str:
     payload = {
         "model": MODEL_NAME,
@@ -250,14 +223,10 @@ def clean_sql(raw: str) -> str:
     """Strip markdown fences, backticks, leading text from SQL output."""
     cleaned = re.sub(r"```sql|```", "", raw, flags=re.IGNORECASE).strip()
     cleaned = cleaned.replace("`", "").strip()
-    # If model output has explanation text before SELECT, extract from SELECT onward
     match = re.search(r"(SELECT\s.+)", cleaned, re.IGNORECASE | re.DOTALL)
     return match.group(1).strip() if match else cleaned
 
-
-# ============================================================
-#  10. DISPLAY EXISTING CHAT HISTORY
-# ============================================================
+#DISPLAY CHAT HISTORY
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
@@ -265,13 +234,8 @@ for msg in st.session_state.messages:
             with st.expander("📊 Raw Database Records"):
                 st.dataframe(msg["dataframe"], use_container_width=True)
 
-
-# ============================================================
-#  11. MAIN CHAT LOGIC
-# ============================================================
+#MAIN CHAT LOGIC
 if user_input := st.chat_input("Type your query here..."):
-
-    # Append & show user message
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
@@ -281,14 +245,11 @@ if user_input := st.chat_input("Type your query here..."):
         df_result    = None
 
         try:
-            # ── STEP 1: Classify intent ──────────────────────────
             intent_raw = ollama_chat(
                 CLASSIFIER_PROMPT,
                 [{"role": "user", "content": user_input}]
             )
             intent = "DATABASE" if "DATABASE" in intent_raw.upper() else "GENERAL"
-
-            # ── STEP 2: Database path ────────────────────────────
             if intent == "DATABASE":
                 sql_raw = ollama_chat(
                     SQL_GENERATOR_PROMPT,
@@ -296,7 +257,7 @@ if user_input := st.chat_input("Type your query here..."):
                 )
 
                 if "CANNOT_GENERATE" in sql_raw.upper() or sql_raw.startswith("__ERROR__"):
-                    intent = "GENERAL"   # fall through to general
+                    intent = "GENERAL"   
 
                 else:
                     query = clean_sql(sql_raw)
@@ -316,7 +277,6 @@ if user_input := st.chat_input("Type your query here..."):
                         db_ok    = False
 
                     if db_ok and df_result is not None and not df_result.empty:
-                        # Stream the natural-language summary
                         summary_messages = [{
                             "role": "user",
                             "content": (
@@ -339,7 +299,6 @@ if user_input := st.chat_input("Type your query here..."):
                             st.dataframe(df_result, use_container_width=True)
 
                     elif db_ok and df_result is not None and df_result.empty:
-                        # SQL ran fine but zero rows — answer gracefully
                         no_data_msg = [{
                             "role": "user",
                             "content": (
@@ -357,10 +316,7 @@ if user_input := st.chat_input("Type your query here..."):
                         final_answer = streamed
 
                     elif db_error:
-                        # SQL was malformed — fall back to general
                         intent = "GENERAL"
-
-            # ── STEP 3: General path ─────────────────────────────
             if intent == "GENERAL" or not final_answer:
                 # Build a short context window (last 6 turns)
                 history = []
@@ -378,8 +334,6 @@ if user_input := st.chat_input("Type your query here..."):
         except Exception as fatal:
             final_answer = f"⚠️ System fault: {fatal}"
             st.error(final_answer)
-
-    # ── Save to session memory ───────────────────────────────
     if final_answer:
         st.session_state.messages.append({
             "role":      "assistant",
