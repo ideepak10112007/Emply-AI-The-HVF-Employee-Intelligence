@@ -43,11 +43,11 @@ The database tracks tracking parameters across a 100-employee roster distributed
 Follow these sequential steps to run this secure terminal environment on your local workstation:
 
 ### 1. Clone the Repository
-cmd
+**CMD**
 
-git clone [https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git](https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git)
+*git clone [https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git](https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git)*
 
-cd Emply-AI-The-HVF-Employee-Intelligence
+*cd Emply-AI-The-HVF-Employee-Intelligence*
 
 
 
