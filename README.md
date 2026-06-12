@@ -63,6 +63,10 @@ ollama pull llama3.2:3b
 ### 3. Initialize the Relational Database
 
 Set up your local MySQL Server instance and populate the relational tables with your data. Ensure the database credentials match the connection metrics specified inside the main application code.
+1. Open XAMPP and start Apache and MySQL.
+2. Go to `http://localhost/phpmyadmin/`.
+3. Create a new database matching your configuration name.
+4. Click the **Import** tab, select the `database_setup.sql` file from this repository, and click **Import/Go**.
 
 ### 4. Install Dependencies & Launch
 
