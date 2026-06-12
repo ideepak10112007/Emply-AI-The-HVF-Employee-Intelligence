@@ -1,22 +1,23 @@
-**🛡️ Emply - The HVF Employee Intelligence 🪖**
+```markdown
+# 🛡️ Emply - The HVF Employee Intelligence 🪖
 
-An enterprise-grade, secure offline AI assistant engineered specifically for the **Heavy Vehicles Factory (HVF)** in Avadi, Chennai, operating under 
-**Armoured Vehicles Nigam Limited (AVNL), Ministry of Defence, Government of India.** 
+An enterprise-grade, secure offline AI assistant engineered specifically for the **Heavy Vehicles Factory (HVF) in Avadi, Chennai**, operating under Armoured Vehicles Nigam Limited (AVNL), Ministry of Defence, Government of India. 
 
-Emply features a cutting-edge *dual-brain routing* architecture that dynamically processes natural language inputs to either execute real-time local 
-MySQL database queries or provide comprehensive, domain-specific defense engineering insights.
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Emply features a cutting-edge **dual-brain routing architecture** that dynamically processes natural language inputs to either execute real-time local MySQL database queries or provide comprehensive, domain-specific defense engineering insights.
 
-🚀 Key Features
+---
+
+## 🚀 Key Features
 
 * **Secure Authentication Portal:** A hard-coded terminal-style login gate protecting internal data structures from unauthorized perimeter access.
 * **Dual-Brain Intelligent Router:** A low-latency classification algorithm that determines if a user inquiry requires data extraction (`DATABASE`) or conceptual analysis (`GENERAL`).
 * **Deterministic SQL Compiler:** Seamlessly translates complex, ungrammatical, or "floppy" human questions into precise MySQL code blocks using advanced wildcard `LIKE` logic and implicit typo correction.
 * **Adaptive Visual Theme Mapping:** Custom CSS injectors override native components to guarantee flawless conversation text visibility across both Streamlit Light and Dark modes.
-* **Localized Factory Lore:** Hardcoded semantic translation maps for unique factory structures (e.g matching "Steel Metal Shop" to the literal database string `'SMS'`).
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+* **Localized Factory Lore:** Hardcoded semantic translation maps for unique factory structures (e.g., matching "Steel Metal Shop" to the literal database string `'SMS'`).
 
-🛠️ Tech Stack
+---
+
+## 🛠️ Tech Stack
 
 * **User Interface:** Streamlit (Python-based Web Framework)
 * **Database Management:** MySQL Relational Database Server
@@ -43,8 +44,8 @@ Follow these sequential steps to run this secure terminal environment on your lo
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
-cd YOUR_REPOSITORY_NAME
+git clone [https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git](https://github.com/ideepak10112007/Emply-AI-The-HVF-Employee-Intelligence.git)
+cd Emply-AI-The-HVF-Employee-Intelligence
 
 ```
 
@@ -53,7 +54,7 @@ cd YOUR_REPOSITORY_NAME
 Ensure Ollama is installed on your host machine, then pull the required model layer via your command terminal:
 
 ```bash
-ollama pull llama3.1:8b
+ollama pull llama3.2:3b
 
 ```
 
@@ -65,16 +66,18 @@ Set up your local MySQL Server instance and populate the relational tables with 
 
 Install the required application layers using pip, then deploy the server architecture:
 
-`
+```bash
 pip install streamlit mysql-connector-python requests
-python -m streamlit run F3finalbot.py
+python -m streamlit run EmplyAI_Deepak-I.py
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+```
 
-🔒 Security & Access Disclaimer
+---
 
-> **NOTICE:** This system is configured strictly for internal administrative evaluation. All access points are subject to secure session logging.
-             Unauthorized modifications of database records, credentials, or code routing files are heavily restricted.
+## 🔒 Security & Access Disclaimer
 
+> **NOTICE:** This system is configured strictly for internal administrative evaluation. All access points are subject to secure session logging. Unauthorized modifications of database records, credentials, or code routing files are heavily restricted.
 
+```
 
+```
